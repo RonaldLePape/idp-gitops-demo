@@ -1,0 +1,20 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xapp-namespace
+spec:
+  compositeTypeRef:
+    apiVersion: platform.ronald.dev/v1alpha1
+    kind: XApp
+
+  resources:
+    - name: namespace
+      base:
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: placeholder
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.namespace
+          toFieldPath: metadata.name
