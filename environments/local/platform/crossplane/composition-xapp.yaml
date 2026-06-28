@@ -7,14 +7,22 @@ spec:
     apiVersion: platform.ronald.dev/v1alpha1
     kind: XApp
 
-  resources:
-    - name: namespace
-      base:
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: placeholder
-      patches:
-        - type: FromCompositeFieldPath
-          fromFieldPath: spec.namespace
-          toFieldPath: metadata.name
+  mode: Pipeline
+  pipeline:
+    - step: create-namespace
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: namespace
+            base:
+              apiVersion: v1
+              kind: Namespace
+              metadata:
+                name: placeholder
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.namespace
+                toFieldPath: metadata.name
