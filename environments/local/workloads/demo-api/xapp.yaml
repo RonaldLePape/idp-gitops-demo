@@ -5,3 +5,5 @@ metadata:
 spec:
   appName: demo-api
   namespace: demo-api
+  environment: local
+  owner: ronald

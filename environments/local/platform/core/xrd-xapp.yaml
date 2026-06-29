@@ -23,6 +23,12 @@ spec:
                   type: string
                 namespace:
                   type: string
+                environment:
+                  type: string
+                  default: local
+                owner:
+                  type: string
+                  default: platform-team
               required:
                 - appName
                 - namespace

@@ -11,7 +11,7 @@ spec:
     path: environments/local/platform/portal
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: platform-portal
   syncPolicy:
     automated:
       prune: true

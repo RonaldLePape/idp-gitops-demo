@@ -11,7 +11,7 @@ spec:
     path: environments/local/platform/observability
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: platform-observability
   syncPolicy:
     automated:
       prune: true

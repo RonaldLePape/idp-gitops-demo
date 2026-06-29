@@ -26,3 +26,52 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.namespace
                 toFieldPath: metadata.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.appName
+                toFieldPath: metadata.labels[platform.ronald.dev/app]
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.environment
+                toFieldPath: metadata.labels[platform.ronald.dev/environment]
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.owner
+                toFieldPath: metadata.labels[platform.ronald.dev/owner]
+          
+          - name: resourcequota
+            base:
+              apiVersion: v1
+              kind: ResourceQuota
+              metadata:
+                name: default-quota
+                namespace: placeholder
+              spec:
+                hard:
+                  requests.cpu: "500m"
+                  requests.memory: "512Mi"
+                  limits.cpu: "1"
+                  limits.memory: "1Gi"
+                  pods: "10"
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.namespace
+                toFieldPath: metadata.namespace
+
+          - name: limitrange
+            base:
+              apiVersion: v1
+              kind: LimitRange
+              metadata:
+                name: default-limits
+                namespace: placeholder
+              spec:
+                limits:
+                  - type: Container
+                    default:
+                      cpu: "500m"
+                      memory: "512Mi"
+                    defaultRequest:
+                      cpu: "100m"
+                      memory: "128Mi"
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.namespace
+                toFieldPath: metadata.namespace
