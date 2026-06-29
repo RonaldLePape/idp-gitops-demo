@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform
+  name: root
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/RonaldLePape/idp-gitops-demo.git
     targetRevision: main
-    path: environments/local/applications
+    path: environments/local/applications/platform
 
   destination:
     server: https://kubernetes.default.svc
