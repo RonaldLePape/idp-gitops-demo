@@ -75,3 +75,7 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.namespace
                 toFieldPath: metadata.namespace
+
+    - step: automatically-detect-ready-composed-resources
+      functionRef:
+        name: function-auto-ready
